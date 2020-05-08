@@ -1,28 +1,14 @@
 const express = require("express");
 const config = require("./src/config");
 const taskApi = require("./src/routes/task");
-
-
 const mongoose = require("mongoose");
-
-
 const app = express();
-
-
 
 // JSON
 app.use(express.json());
 
 // ROUTES
 taskApi(app);
-
-// cors
-app.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-});
-
 
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);

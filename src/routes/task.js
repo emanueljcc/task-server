@@ -1,20 +1,22 @@
 const express = require("express");
 const TaskController = require("../controllers/TaskController");
+const cors = require("cors");
 
 function taskApi(app) {
     const router = express.Router();
 
-    app.use("/api/tasks", router);
+    // enable cors
+    app.use("/api/tasks", cors(), router);
 
-    router.get("/", TaskController.getAll);
+    router.get("/", cors(), TaskController.getAll);
 
-    router.get("/:id", TaskController.getId);
+    router.get("/:id", cors(), TaskController.getId);
 
-    router.post("/", TaskController.create);
+    router.post("/", cors(), TaskController.create);
 
-    router.put("/:id", TaskController.update);
+    router.put("/:id", cors(), TaskController.update);
 
-    router.delete("/:id", TaskController.deleted);
+    router.delete("/:id", cors(), TaskController.deleted);
 
 }
 

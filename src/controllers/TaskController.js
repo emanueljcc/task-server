@@ -34,9 +34,8 @@ getId = async (req, res) => {
 
 create = async (req, res) => {
     try {
-        const { name, type } = req.body;
 
-        const data = new Tasks({ name, type });
+        const data = new Tasks(req.body);
 
         const saved = await data.save();
 
@@ -53,10 +52,9 @@ create = async (req, res) => {
 update = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, type } = req.body;
+        const { active, name, comment } = req.body;
 
-
-        const update = await Tasks.findOneAndUpdate(id, {name, type}, { new: true });
+        const update = await Tasks.findOneAndUpdate({_id: id}, {active, name, comment}, { new: true });
 
         res.status(200).json({
             data: update,
